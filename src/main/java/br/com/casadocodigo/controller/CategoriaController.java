@@ -1,8 +1,8 @@
 package br.com.casadocodigo.controller;
 
-import br.com.casadocodigo.model.Autor;
-import br.com.casadocodigo.request.AutorRequest;
-import br.com.casadocodigo.repository.AutorRepository;
+import br.com.casadocodigo.model.Categoria;
+import br.com.casadocodigo.repository.CategoriaRepository;
+import br.com.casadocodigo.request.CategoriaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/autor")
-public class AutorController {
+@RequestMapping("/categoria")
+public class CategoriaController {
 
     @Autowired
-    private AutorRepository autorRepository;
+    private CategoriaRepository categoriaRepository;
 
     @PostMapping
-    public ResponseEntity salvarAutor(@RequestBody @Valid AutorRequest autorRequest){
+    public ResponseEntity salvarCategoria(@RequestBody @Valid CategoriaRequest categoriaRequest) {
 
-        Autor autor = autorRequest.toModel();
-        autorRepository.save(autor);
-
+        Categoria categoria = categoriaRequest.toModel();
+        categoriaRepository.save(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 }

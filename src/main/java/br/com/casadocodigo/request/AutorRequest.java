@@ -1,5 +1,6 @@
-package br.com.casadocodigo.model;
+package br.com.casadocodigo.request;
 
+import br.com.casadocodigo.model.Autor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
