@@ -1,11 +1,16 @@
 package br.com.casadocodigo.request;
 
 import br.com.casadocodigo.model.Categoria;
+import br.com.casadocodigo.utils.UniqueValue;
+import br.com.casadocodigo.utils.Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.NotBlank;
 
+@Slf4j
 public class CategoriaRequest {
 
     @NotBlank
+    @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
     public String getNome() {
@@ -23,4 +28,6 @@ public class CategoriaRequest {
     public Categoria toModel() {
         return new Categoria(nome);
     }
+
+
 }

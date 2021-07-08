@@ -17,6 +17,7 @@ public class Autor {
     private long id;
     @NotBlank
     private String nome;
+    @Column(unique=true)
     @NotBlank
     @Email
     private String email;
@@ -24,6 +25,10 @@ public class Autor {
     @Size(max = 400)
     private String descricao;
     private LocalDateTime instanteRegistro;
+
+    @Deprecated
+    public Autor() {
+    }
 
     public Autor(String nome, String email, String descricao) {
         this.nome = nome;
