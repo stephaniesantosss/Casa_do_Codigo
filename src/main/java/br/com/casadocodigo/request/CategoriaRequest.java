@@ -26,7 +26,7 @@ public class CategoriaRequest {
     }
 
     public Categoria toModel() {
-        return new Categoria(nome);
+        return new Categoria(Utils.removerAcentos(nome.toLowerCase()));
     }
 
 

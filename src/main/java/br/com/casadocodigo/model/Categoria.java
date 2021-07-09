@@ -20,7 +20,7 @@ public class Categoria {
     public Categoria(){}
 
     public Categoria(String nome){
-        this.nome = Utils.removerAcentos(nome.toLowerCase());
+        this.nome = nome;
     }
 
 

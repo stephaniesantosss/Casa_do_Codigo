@@ -4,17 +4,16 @@ import br.com.casadocodigo.model.Livro;
 import br.com.casadocodigo.repository.AutorRepository;
 import br.com.casadocodigo.repository.CategoriaRepository;
 import br.com.casadocodigo.repository.LivroRepository;
+import br.com.casadocodigo.request.LivroProjecao;
 import br.com.casadocodigo.request.LivroRequest;
 import br.com.casadocodigo.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/livro")
@@ -38,7 +37,11 @@ public class LivroController {
         Livro livro = livroRequest.toModel(categoriaRepository, autorRepository);
         livroRepository.save(livro);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
-
+    @GetMapping()
+    public ResponseEntity listar(){
+        List<LivroProjecao> list = livroRepository.findAllBy();
+        return ResponseEntity.ok().body(list);
     }
 }

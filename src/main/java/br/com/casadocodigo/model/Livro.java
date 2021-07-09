@@ -94,4 +94,12 @@ public class Livro {
     public Autor getAutor() {
         return autor;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 }
