@@ -6,14 +6,24 @@ import br.com.casadocodigo.model.Livro;
 import br.com.casadocodigo.repository.AutorRepository;
 import br.com.casadocodigo.repository.CategoriaRepository;
 import br.com.casadocodigo.utils.UniqueValue;
+import br.com.casadocodigo.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class LivroRequest {
 
@@ -97,4 +107,6 @@ public class LivroRequest {
         Autor autorId = autorRepository.getById(autor);
         return new Livro(titulo, resumo, sumario, preco, numPagina, isbn, dataPublicacao,  categoriaId, autorId);
     }
+
+
 }
