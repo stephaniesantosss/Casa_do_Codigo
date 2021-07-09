@@ -2,7 +2,6 @@ package br.com.casadocodigo.request;
 
 import br.com.casadocodigo.model.Categoria;
 import br.com.casadocodigo.utils.UniqueValue;
-import br.com.casadocodigo.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -26,7 +25,7 @@ public class CategoriaRequest {
     }
 
     public Categoria toModel() {
-        return new Categoria(Utils.removerAcentos(nome.toLowerCase()));
+        return new Categoria(nome);
     }
 
 

@@ -1,14 +1,12 @@
 package br.com.casadocodigo.model;
 
-import br.com.casadocodigo.utils.Utils;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import java.text.Normalizer;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "pais")
+public class Pais {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +14,12 @@ public class Categoria {
     @Column(unique=true)
     @NotBlank
     private String nome;
-    @Deprecated
-    public Categoria(){}
 
-    public Categoria(String nome){
+    @Deprecated
+    public Pais() {
+    }
+
+    public Pais(String nome) {
         this.nome = nome;
     }
 

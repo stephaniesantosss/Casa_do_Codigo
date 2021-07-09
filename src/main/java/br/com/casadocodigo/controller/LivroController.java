@@ -1,5 +1,6 @@
 package br.com.casadocodigo.controller;
 
+import br.com.casadocodigo.request.dto.LivroDto;
 import br.com.casadocodigo.model.Livro;
 import br.com.casadocodigo.repository.AutorRepository;
 import br.com.casadocodigo.repository.CategoriaRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livro")
@@ -40,8 +42,15 @@ public class LivroController {
     }
 
     @GetMapping()
-    public ResponseEntity listar(){
+    public ResponseEntity listar() {
         List<LivroProjecao> list = livroRepository.findAllBy();
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroDto> detalhar(@PathVariable Long id) {
+        Optional<Livro> livro = livroRepository.findById(id);
+        return livro.map(value -> ResponseEntity.ok(new LivroDto(value))).orElseGet(()
+                -> ResponseEntity.notFound().build());
     }
 }

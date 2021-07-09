@@ -35,16 +35,16 @@ public class LivroRequest {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataPublicacao;
     @NotNull
-    private long categoria;
+    private Long categoria;
     @NotNull
-    private long autor;
+    private Long autor;
 
     @Deprecated
     public LivroRequest() {
     }
 
     public LivroRequest(String titulo, String resumo, String sumario, BigDecimal preco, Integer numPagina,
-                        String isbn, LocalDate dataPublicacao, long categoria, long autor) {
+                        String isbn, LocalDate dataPublicacao, Long categoria, Long autor) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -84,11 +84,11 @@ public class LivroRequest {
         return dataPublicacao;
     }
 
-    public long getCategoria() {
+    public Long getCategoria() {
         return categoria;
     }
 
-    public long getAutor() {
+    public Long getAutor() {
         return autor;
     }
 

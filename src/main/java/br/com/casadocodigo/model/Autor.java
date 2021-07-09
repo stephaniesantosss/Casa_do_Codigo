@@ -14,7 +14,7 @@ public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotBlank
     private String nome;
     @Column(unique=true)
@@ -37,7 +37,7 @@ public class Autor {
         this.instanteRegistro = LocalDateTime.now();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
