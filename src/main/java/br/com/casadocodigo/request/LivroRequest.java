@@ -21,12 +21,10 @@ public class LivroRequest {
     @NotBlank
     @UniqueValue(domainClass = Livro.class, fieldName = "titulo")
     private String titulo;
-    @NotBlank
-    @Size(max = 500)
+    @NotBlank @Size(max = 500)
     private String resumo;
     private String sumario;
-    @NotNull
-    @DecimalMin("20.00")
+    @NotNull @DecimalMin("20.00")
     private BigDecimal preco;
     @Min(100)
     private Integer numPagina;

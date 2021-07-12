@@ -3,6 +3,7 @@ package br.com.casadocodigo.request;
 import br.com.casadocodigo.model.Estado;
 import br.com.casadocodigo.model.Pais;
 import br.com.casadocodigo.repository.PaisRepository;
+import br.com.casadocodigo.utils.ExisteId;
 import br.com.casadocodigo.utils.UniqueValue;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -14,6 +15,7 @@ public class EstadoRequest {
     @UniqueValue(domainClass = Estado.class, fieldName = "nome")
     private String nome;
     @NotNull
+    @ExisteId(entidade = Pais.class, atributo = "id")
     private Long pais;
 
     public EstadoRequest() {

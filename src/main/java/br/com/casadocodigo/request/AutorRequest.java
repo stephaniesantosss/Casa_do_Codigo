@@ -13,13 +13,10 @@ public class AutorRequest {
 
     @NotBlank
     private String nome;
-    @Column(unique=true)
-    @NotBlank
-    @Email
+    @Column(unique=true) @NotBlank @Email
     @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
-    @NotBlank
-    @Size(max = 400)
+    @NotBlank @Size(max = 400)
     private String descricao;
     
     public String getNome() {

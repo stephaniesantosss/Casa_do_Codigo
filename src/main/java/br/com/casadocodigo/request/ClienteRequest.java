@@ -1,10 +1,14 @@
 package br.com.casadocodigo.request;
 
+import br.com.casadocodigo.client.ViaCepService;
 import br.com.casadocodigo.model.Cliente;
+import br.com.casadocodigo.model.Endereco;
 import br.com.casadocodigo.model.Estado;
 import br.com.casadocodigo.model.Pais;
 import br.com.casadocodigo.repository.EstadoRepository;
 import br.com.casadocodigo.repository.PaisRepository;
+import br.com.casadocodigo.utils.CPFOrCNPJ;
+import br.com.casadocodigo.utils.ExisteId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,22 +16,15 @@ import javax.validation.constraints.NotNull;
 
 public class ClienteRequest {
 
-    @Email
-    @NotBlank
+    @Email @NotBlank
     private String email;
     @NotBlank
     private String nome;
     @NotBlank
     private String sobrenome;
-    @NotBlank
+    @NotBlank @CPFOrCNPJ
     private String documento;
-    @NotBlank
-    private String endereco;
-    @NotBlank
-    private String complemento;
-    @NotBlank
-    private String cidade;
-    @NotNull
+    @NotNull @ExisteId(entidade = Pais.class, atributo = "id")
     private Long pais;
     @NotNull
     private Long estado;
@@ -35,19 +32,18 @@ public class ClienteRequest {
     private String telefone;
     @NotBlank
     private String cep;
+    @NotBlank
+    private String complemento;
 
     public ClienteRequest() {
     }
 
-    public ClienteRequest(String email, String nome, String sobrenome, String documento, String endereco,
-                          String complemento, String cidade, Long pais, Long estado, String telefone, String cep) {
+    public ClienteRequest(String email, String nome, String sobrenome, String documento, Long pais,
+                          Long estado, String telefone, String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.documento = documento;
-        this.endereco = endereco;
-        this.complemento = complemento;
-        this.cidade = cidade;
         this.pais = pais;
         this.estado = estado;
         this.telefone = telefone;
@@ -70,18 +66,6 @@ public class ClienteRequest {
         return documento;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
     public Long getPais() {
         return pais;
     }
@@ -98,9 +82,14 @@ public class ClienteRequest {
         return cep;
     }
 
-    public Cliente toModel(EstadoRepository estadoRepository, PaisRepository paisRepository){
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public Cliente toModel(EstadoRepository estadoRepository, PaisRepository paisRepository, ViaCepService viaCepService){
         Estado estadoId = estadoRepository.getById(estado);
         Pais paisId = paisRepository.getById(pais);
-        return new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, paisId, estadoId, telefone, cep);
+        Endereco endereco = viaCepService.buscaEnderecoPorCep(cep);
+        return new Cliente(email, nome, sobrenome, documento, paisId, estadoId, telefone, endereco, complemento);
     }
 }

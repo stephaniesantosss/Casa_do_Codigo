@@ -1,5 +1,6 @@
 package br.com.casadocodigo.model;
 
+import br.com.casadocodigo.utils.CPFOrCNPJ;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,14 +21,9 @@ public class Cliente {
     private String nome;
     @NotBlank
     private String sobrenome;
+    @CPFOrCNPJ
     @NotBlank
     private String documento;
-    @NotBlank
-    private String endereco;
-    @NotBlank
-    private String complemento;
-    @NotBlank
-    private String cidade;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "idPais", nullable = false)
@@ -38,26 +34,26 @@ public class Cliente {
     private Estado estado;
     @NotBlank
     private String telefone;
+
+    private Endereco endereco;
     @NotBlank
-    private String cep;
+    private String complemento;
 
     @Deprecated
     public Cliente() {
     }
 
-    public Cliente(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
-                   String cidade, Pais pais, Estado estado, String telefone, String cep) {
+    public Cliente(String email, String nome, String sobrenome, String documento, Pais pais, Estado estado,
+                   String telefone, Endereco endereco, String complemento) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.documento = documento;
-        this.endereco = endereco;
-        this.complemento = complemento;
-        this.cidade = cidade;
         this.pais = pais;
         this.estado = estado;
         this.telefone = telefone;
-        this.cep = cep;
+        this.endereco = endereco;
+        this.complemento = complemento;
     }
 
     public Long getId() {
@@ -80,18 +76,6 @@ public class Cliente {
         return documento;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
     public Pais getPais() {
         return pais;
     }
@@ -104,7 +88,11 @@ public class Cliente {
         return telefone;
     }
 
-    public String getCep() {
-        return cep;
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public String getComplemento() {
+        return complemento;
     }
 }
