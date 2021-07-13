@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "estado")
 public class Estado {
 
     @Id

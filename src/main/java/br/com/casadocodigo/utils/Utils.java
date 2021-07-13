@@ -1,13 +1,8 @@
 package br.com.casadocodigo.utils;
 
-import java.text.Normalizer;
 import java.time.LocalDate;
 
 public class Utils {
-
-    public static String removerAcentos(String str) {
-        return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-    }
 
     public static boolean isValid(String data) {
 

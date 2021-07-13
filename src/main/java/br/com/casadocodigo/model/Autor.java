@@ -5,11 +5,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "autor")
 public class Autor {
 
     @Id

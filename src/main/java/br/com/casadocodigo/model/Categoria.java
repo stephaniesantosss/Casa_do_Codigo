@@ -1,13 +1,10 @@
 package br.com.casadocodigo.model;
 
-import br.com.casadocodigo.utils.Utils;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import java.text.Normalizer;
 
 @Entity
-@Table(name = "categoria")
 public class Categoria {
 
     @Id
